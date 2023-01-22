@@ -5,9 +5,11 @@
 
 
 void drawWindSqure() {
+    float up = 1;
+    float down = 2;
     glLineWidth(7);
     glBegin(GL_LINES);
-    for (float i = 1; i <= 2; i += 0.25) {
+    for (float i = up; i <= down; i += 0.25) {
         glVertex3f(-1.2, 1, i);
         glVertex3f(-0.4, 1, i);
 
@@ -15,18 +17,27 @@ void drawWindSqure() {
         glVertex3f(0.4, 1, i);
     }
 
-    glVertex3f(1.2, 1, 1);
-    glVertex3f(1.2, 1, 2);
+    glVertex3f(1.2, 1, up);
+    glVertex3f(1.2, 1, down);
 
-    glVertex3f(0.4, 1, 1);
-    glVertex3f(0.4, 1, 2);
+    glVertex3f(0.4, 1, up);
+    glVertex3f(0.4, 1, down);
 
-    glVertex3f(-1.2, 1, 1);
-    glVertex3f(-1.2, 1, 2);
+    glVertex3f(-1.2, 1, up);
+    glVertex3f(-1.2, 1, down);
 
-    glVertex3f(-0.4, 1, 1);
-    glVertex3f(-0.4, 1, 2);
+    glVertex3f(-0.4, 1, up);
+    glVertex3f(-0.4, 1, down);
+
     glEnd();
+
+    // middle lines
+    glPushMatrix();
+    glColor3f(0, 0, 0);
+    glTranslatef(0, 1, 0);
+    glutSolidCone(0.13, 5, 100, 100);
+    glutSolidSphere(0.13, 100, 100);
+    glPopMatrix();
 }
 
 void drawWindBrcakets() {

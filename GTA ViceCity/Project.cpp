@@ -118,7 +118,9 @@ void display() {
     drawGrid();
     glPopMatrix();
 
-    glScalef(0.4, 0.5, 0.5);
+    /*
+    // Boats
+   // glScalef(0.6, 0.6, 0.6);
     glPushMatrix();
 
     glPushMatrix();
@@ -131,12 +133,16 @@ void display() {
     drawBoat(0.0, 0.0, 1.0);
     glPopMatrix();
 
+    
     glPushMatrix();
     glTranslatef(-8, 1, 8);
     drawBoat(0.0, 1.0, 0.0);
     glPopMatrix();
 
     glPopMatrix();
+    */
+
+
 
     glutSwapBuffers();
     glFlush();
