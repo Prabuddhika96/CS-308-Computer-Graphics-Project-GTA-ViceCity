@@ -21,6 +21,9 @@
     <ClCompile Include="boat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Crain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h">

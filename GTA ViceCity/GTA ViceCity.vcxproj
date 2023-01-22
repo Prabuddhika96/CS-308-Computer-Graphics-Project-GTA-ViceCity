@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="boat.cpp" />
+    <ClCompile Include="Crain.cpp" />
     <ClCompile Include="Project.cpp" />
   </ItemGroup>
   <ItemGroup>

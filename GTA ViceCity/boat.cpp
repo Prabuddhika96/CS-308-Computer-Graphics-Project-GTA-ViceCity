@@ -16,6 +16,7 @@ void drawWindSqure() {
         glVertex3f(1.2, 1, i);
         glVertex3f(0.4, 1, i);
     }
+    glLineWidth(1);
 
     glVertex3f(1.2, 1, up);
     glVertex3f(1.2, 1, down);
@@ -395,6 +396,7 @@ void drawSteeringWheel() {
     glVertex3f(0, 0, 0);
     glVertex3f(0, -0.5, 0.5);
     glEnd();
+    glLineWidth(1);
 
     glPopMatrix();
 }

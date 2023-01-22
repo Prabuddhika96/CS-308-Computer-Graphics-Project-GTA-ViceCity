@@ -118,31 +118,32 @@ void display() {
     drawGrid();
     glPopMatrix();
 
-    /*
+    
     // Boats
-   // glScalef(0.6, 0.6, 0.6);
+    glScalef(0.6, 0.6, 0.6);
     glPushMatrix();
 
     glPushMatrix();
-    glTranslatef(8, 1, -8);
+    glTranslatef(8, 0.8, -8);
     drawBoat(1.0, 0.0, 0.0);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(0, 1, 0);
-    drawBoat(0.0, 0.0, 1.0);
+    glTranslatef(0, 1.5, 0);
+    //drawBoat(0.0, 0.0, 1.0);
+    drawCrain();
     glPopMatrix();
 
     
     glPushMatrix();
-    glTranslatef(-8, 1, 8);
+    glTranslatef(-8, 0.8, 8);
     drawBoat(0.0, 1.0, 0.0);
     glPopMatrix();
 
     glPopMatrix();
-    */
+    
 
-
+    //drawCrain();
 
     glutSwapBuffers();
     glFlush();
