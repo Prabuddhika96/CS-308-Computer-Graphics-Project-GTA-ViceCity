@@ -58,7 +58,7 @@ void topStage() {
 	glColor3f(0.8, 0.8, 0.8);
 	glPushMatrix();
 	glTranslatef(0, 2.35, 0);
-	glScalef(5, 0.25, 5);
+	glScalef(4.5, 0.25, 4.5);
 	glutSolidCube(1);
 	glPopMatrix();
 }

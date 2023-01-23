@@ -241,8 +241,8 @@ void keyboard(unsigned char key, int x, int y) {
 
     // Crain arm
     if (key == 'a') {
-        if (crainArm >= 100) {
-            crainArm = 100;
+        if (crainArm >= 85) {
+            crainArm = 85;
         }
         else {
             crainArm += 1;
