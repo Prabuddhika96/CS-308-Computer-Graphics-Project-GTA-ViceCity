@@ -125,13 +125,34 @@ void drawBoatSide(float boatHeight, float R, float G, float B) {
     }
 }
 
-void drawBoatBack(float boatHeight, float R, float G, float B) {
+void drawBoatBack(float boatHeight, float R, float G, float B, float depth) {
+    glPushMatrix();
+    // body
+    glPushMatrix();
     glColor3f((R - 0.6), G, B);
     glBegin(GL_POLYGON);
     glVertex3f(-3, 1, -4);
     glVertex3f(3, 1, -4);
     glVertex3f(0, boatHeight, -4);
     glEnd();
+    glPopMatrix();
+
+    // tube - right
+    glPushMatrix();
+    glColor3f(0, 0, 0);
+    glTranslatef(1.5, 1, -2.54);
+    glutSolidTorus(0.15, 0.3, 100, 100);
+    glPopMatrix();
+
+    // tube - left
+    glPushMatrix();
+    glColor3f(0, 0, 0);
+    glTranslatef(-1.25, depth+0.1, -2.2);
+    glRotatef(90, 1, 0, 0);
+    glutSolidTorus(0.15, 0.3, 100, 100);
+    glPopMatrix();
+
+    glPopMatrix();
 }
 
 
@@ -423,7 +444,7 @@ void drawBoat(float R, float G, float B) {
 
     drawBoatSide(boatHeight, R, G, B);
 
-    drawBoatBack(boatHeight, R, G, B);
+    drawBoatBack(boatHeight, R, G, B, depth);
 
     drawControlRoom(depth);
 

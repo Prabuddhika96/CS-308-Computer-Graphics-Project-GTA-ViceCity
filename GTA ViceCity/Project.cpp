@@ -9,11 +9,13 @@ GLfloat animXRot, animYRot, animZRot = 0;
 //camera variables
 GLfloat camX = 0, camY = 0, camZ = 0;
 
-//object variables - door
-GLfloat doorY = 0;
+//Crain variables - operating Room
+GLfloat crainY = 0;
+GLfloat crainWidth = 5.5;
+GLfloat crainArm = 0;
 
-//object variables - inside house
-GLfloat objY = 0;
+// boa6t variables
+GLfloat boatY = 360;
 
 //scene variables
 GLfloat sceX = 0, sceY = 0, sceZ = 0;
@@ -45,6 +47,15 @@ void drawGrid() {
     }
     glEnd();
 
+}
+
+void drawSea() {
+    glBegin(GL_POLYGON);
+    glVertex3f(-10, 0, -10);
+    glVertex3f(10, 0, -10);
+    glVertex3f(10, 0, 10);
+    glVertex3f(-10, 0, 10);
+    glEnd();
 }
 
 void drawAxes() {
@@ -114,8 +125,9 @@ void display() {
     //drawAxes();
 
     glPushMatrix();
-    glColor3f(1.0, 1.0, 1.0);
-    drawGrid();
+    glColor3f(0.0, 0.2, 0.9);
+    //drawGrid();
+    drawSea();
     glPopMatrix();
 
     
@@ -124,22 +136,33 @@ void display() {
     glPushMatrix();
 
     glPushMatrix();
-    glTranslatef(8, 0.8, -8);
+    glRotatef(boatY, 0, 1, 0);
+
+    glPushMatrix();
+    glTranslatef(8, 0, 0);    
     drawBoat(1.0, 0.0, 0.0);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-12, 0, 0);
+    glRotatef(180, 0, 1, 0);
+    drawBoat(1.0, 1.0, 0.0);
+    glPopMatrix();
+
     glPopMatrix();
 
     glPushMatrix();
     glTranslatef(0, 1.5, 0);
     //drawBoat(0.0, 0.0, 1.0);
-    drawCrain();
+    drawCrain(crainY, crainArm, crainWidth);
     glPopMatrix();
 
-    
+    /*
     glPushMatrix();
     glTranslatef(-8, 0.8, 8);
     drawBoat(0.0, 1.0, 0.0);
     glPopMatrix();
-
+    */
     glPopMatrix();
     
 
@@ -151,10 +174,10 @@ void display() {
 
 // animation timer function
 void Timer(int v) {
-    objY += 1;
+    boatY -= 1;
 
-    if (objY == 360) {
-        objY = 0;
+    if (boatY == 0) {
+        boatY = 360;
     }
 
     glutPostRedisplay();
@@ -168,7 +191,13 @@ void keyboardSpecial(int key, int x, int y) {
         camY += 1;
     }
     if (key == GLUT_KEY_DOWN) {
-        camY -= 1;
+        if (camY <= -8) {
+            camY = -8;
+        }
+        else {
+            camY -= 1;
+        } 
+        // camY -= 1;
     }
 
     // camera left and right
@@ -192,21 +221,55 @@ void keyboard(unsigned char key, int x, int y) {
         animYRot -= 1;
     }
 
-    // open and close door
-    if (key == 'o') {
-        if (doorY >= 90) {
-            doorY = 90;
+    // operating room
+    if (key == 'C') {
+        if (crainY == 360) {
+            crainY = 0;
         }
         else {
-            doorY += 1;
+            crainY += 1;
         }
     }
     if (key == 'c') {
-        if (doorY <= 0) {
-            doorY = 0;
+        if (crainY == 0) {
+            crainY = 360;
         }
         else {
-            doorY -= 1;
+            crainY -= 1;
+        }
+    }
+
+    // Crain arm
+    if (key == 'a') {
+        if (crainArm >= 100) {
+            crainArm = 100;
+        }
+        else {
+            crainArm += 1;
+        }
+    }
+    if (key == 'A') {
+        if (crainArm <= 0) {
+            crainArm = 0;
+        }
+        else {
+            crainArm -= 1;
+        }
+    }
+    if (key == 'w') {
+        if (crainWidth >= 9) {
+            crainWidth = 9;
+        }
+        else {
+            crainWidth += 0.02;
+        }
+    }
+    if (key == 'W') {
+        if (crainWidth <= 5.5) {
+            crainWidth = 5.5;
+        }
+        else {
+            crainWidth -= 0.02;
         }
     }
 

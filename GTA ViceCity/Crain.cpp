@@ -33,6 +33,16 @@ void drawX_Leg() {
 }
 
 void drawLatterPart() {
+	glPushMatrix();
+
+	glPushMatrix();
+	glColor3f(0.3, 0.1, 0);
+	glTranslatef(0, -3.5, 0);
+	glScalef(7, 1, 7);
+	glRotatef(45, 0, 0, 1);
+	glutSolidDodecahedron();
+	glPopMatrix();
+
 	glPushMatrix();	
 	for (int i = 0; i <= 360; i += 90) {
 		glRotatef(i, 0, 1, 0);
@@ -40,6 +50,8 @@ void drawLatterPart() {
 		drawX_Leg();
 	}
 	glPopMatrix();	
+
+	glPopMatrix();
 }
 
 void topStage() {
@@ -101,8 +113,8 @@ void drawCylinder(GLfloat radius, GLfloat height){
 	glPopMatrix();
 }
 
-void drawCrainArmSide() {
-	float length = 6;
+void drawCrainArmSide(float crainWidth) {
+	//float length = 6;
 
 	glPushMatrix();
 	glColor3f(0.3, 0.3, 0.3);
@@ -110,11 +122,11 @@ void drawCrainArmSide() {
 	glPushMatrix();
 	glLineWidth(5);
 	glBegin(GL_LINES);
-	glVertex3f(-0.4, 0.4, 0);
-	glVertex3f(-0.2, 0.2, length);
+	glVertex3f(-0.3, 0.3, 0);
+	glVertex3f(-0.1, 0.1, crainWidth);
 
-	glVertex3f(0.4, 0.4, 0);
-	glVertex3f(0.2, 0.2, length);
+	glVertex3f(0.3, 0.3, 0);
+	glVertex3f(0.1, 0.1, crainWidth);
 	glEnd();
 	glLineWidth(1);
 	glPopMatrix();
@@ -122,17 +134,26 @@ void drawCrainArmSide() {
 	glPopMatrix();
 }
 
-void drawCrainArm() {
+void drawCrainArm(float crainArm, float crainWidth) {
 	glPushMatrix();
 	glRotatef(-90, 0, 1, 0);
 	glPushMatrix();
 	glTranslatef(0, 3.5, 1.7);
-	glRotatef(-40, 1, 0, 0);
+	glRotatef(crainArm - 40, 1, 0, 0);
 	glPushMatrix();
 	for (float i = 0; i <= 350; i += 90) {
 		glRotatef(i, 0, 0, 1);
-		drawCrainArmSide();
+		drawCrainArmSide(crainWidth);
 	}
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glVertex3f(-0.1, 0.1, crainWidth);
+	glVertex3f(0.1, 0.1, crainWidth);
+	glVertex3f(0.1, -0.1, crainWidth);
+	glVertex3f(-0.1, -0.1, crainWidth);
+	glEnd();
+	glPopMatrix();
+
 	glPopMatrix();
 	glPopMatrix();
 	glPopMatrix();
@@ -180,7 +201,7 @@ void drawControlRoomWindows() {
 	glPopMatrix();
 }
 
-void drawOperatingRoom() {
+void drawOperatingRoom(float crainArm, float crainWidth) {
 	glPushMatrix();
 
 	glPushMatrix();
@@ -201,20 +222,25 @@ void drawOperatingRoom() {
 	drawControlRoomWindows();
 	glPopMatrix();
 
-	drawCrainArm();
+	drawCrainArm(crainArm, crainWidth);
 
 	glPopMatrix();
 }
 
 
 
-void drawCrain() {
+void drawCrain(float crainY, float crainArm, float crainWidth) {
 	glPushMatrix();
 	glScalef(0.6, 0.6, 0.6);	
 	glPushMatrix();
 	drawLatterPart();
 	topStage();
-	drawOperatingRoom();	
+
+	glPushMatrix();
+	glRotatef(crainY, 0, 1, 0);
+	drawOperatingRoom(crainArm, crainWidth);
+	glPopMatrix();
+
 	glPopMatrix();
 	glPopMatrix();
 }
