@@ -11,7 +11,7 @@ GLfloat camX = 0, camY = 0, camZ = 0;
 
 //Crain variables - operating Room
 GLfloat crainY = 0;
-GLfloat crainWidth = 5.5;
+GLfloat crainWidth = 9;
 GLfloat crainArm = 0;
 
 // boa6t variables
@@ -21,7 +21,7 @@ GLfloat boatY = 360;
 GLfloat sceX = 0, sceY = 0, sceZ = 0;
 
 void init() {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.2f, 1.0f, 1.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_NORMALIZE);
@@ -122,7 +122,7 @@ void display() {
     glTranslatef(sceX, sceY, sceZ);
     glRotatef(animYRot, 0, 1, 0);
     glPushMatrix();
-    //drawAxes();
+    drawAxes();
 
     glPushMatrix();
     glColor3f(0.0, 0.2, 0.9);
@@ -130,7 +130,7 @@ void display() {
     drawSea();
     glPopMatrix();
 
-    
+    ///*
     // Boats
     glScalef(0.6, 0.6, 0.6);
     glPushMatrix();
@@ -153,20 +153,10 @@ void display() {
 
     glPushMatrix();
     glTranslatef(0, 1.5, 0);
-    //drawBoat(0.0, 0.0, 1.0);
     drawCrain(crainY, crainArm, crainWidth);
     glPopMatrix();
 
-    /*
-    glPushMatrix();
-    glTranslatef(-8, 0.8, 8);
-    drawBoat(0.0, 1.0, 0.0);
     glPopMatrix();
-    */
-    glPopMatrix();
-    
-
-    //drawCrain();
 
     glutSwapBuffers();
     glFlush();
@@ -191,13 +181,15 @@ void keyboardSpecial(int key, int x, int y) {
         camY += 1;
     }
     if (key == GLUT_KEY_DOWN) {
+        /*
         if (camY <= -8) {
             camY = -8;
         }
         else {
             camY -= 1;
         } 
-        // camY -= 1;
+        */
+         camY -= 1;
     }
 
     // camera left and right
