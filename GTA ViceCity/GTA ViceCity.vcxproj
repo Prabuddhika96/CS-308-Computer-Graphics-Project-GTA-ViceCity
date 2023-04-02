@@ -131,8 +131,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="boat.cpp" />
+    <ClCompile Include="Boat1.cpp" />
+    <ClCompile Include="BoatHouse.cpp" />
+    <ClCompile Include="building.cpp" />
+    <ClCompile Include="Corrido.cpp" />
     <ClCompile Include="Crain.cpp" />
+    <ClCompile Include="Fence.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Gate.cpp" />
+    <ClCompile Include="OilGaloon.cpp" />
     <ClCompile Include="Project.cpp" />
+    <ClCompile Include="Sea.cpp" />
+    <ClCompile Include="Steps.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="project.h" />

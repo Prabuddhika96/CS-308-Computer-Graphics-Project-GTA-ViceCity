@@ -1,14 +1,15 @@
 #include "project.h"
 #include <GL/glut.h>  
 #include <math.h>
-#define pi 3.142857
+
+const double PI = 3.141592654;
 
 void drawLeg() {
 	glPushMatrix();
 	glColor3f(0.6, 0.3, 0);
 	glTranslatef(2, 0, -2);
 	glRotatef(20, 1, 0, 1);
-	glScalef(0.5, 5, 0.5);	
+	glScalef(0.5, 5, 0.5);
 	glutSolidCube(1);
 	glPopMatrix();
 }
@@ -36,20 +37,12 @@ void drawLatterPart() {
 	glPushMatrix();
 
 	glPushMatrix();
-	glColor3f(0.3, 0.1, 0);
-	glTranslatef(0, -3.5, 0);
-	glScalef(7, 1, 7);
-	glRotatef(45, 0, 0, 1);
-	glutSolidDodecahedron();
-	glPopMatrix();
-
-	glPushMatrix();	
 	for (int i = 0; i <= 360; i += 90) {
 		glRotatef(i, 0, 1, 0);
 		drawLeg();
 		drawX_Leg();
 	}
-	glPopMatrix();	
+	glPopMatrix();
 
 	glPopMatrix();
 }
@@ -63,276 +56,53 @@ void topStage() {
 	glPopMatrix();
 }
 
-void drawCylinder(GLfloat radius, GLfloat height){
-	GLfloat x = 0.0;
-	GLfloat y = 0.0;
-	GLfloat angle = 0.0;
-	GLfloat angle_stepsize = 0.1;
-
-	glPushMatrix();
-	glRotatef(90, 1, 0, 0);
-	glTranslatef(0, 0, -(height / 2));	
-	//glRotatef(180, 1, 0, 0);
-
-	/** Draw the tube */
-	glBegin(GL_QUAD_STRIP);
-	angle = 0.0;
-	while (angle < 2 * pi) {
-		x = radius * cos(angle);
-		y = radius * sin(angle);
-		glVertex3f(x, y, height);
-		glVertex3f(x, y, 0.0);
-		angle = angle + angle_stepsize;
-	}
-	glVertex3f(radius, 0.0, height);
-	glVertex3f(radius, 0.0, 0.0);
-	glEnd();
-
-	/** Draw the circle on top of cylinder */
-	glBegin(GL_POLYGON);
-	angle = 0.0;
-	while (angle < 2 * pi) {
-		x = radius * cos(angle);
-		y = radius * sin(angle);
-		glVertex3f(x, y, height);
-		angle = angle + angle_stepsize;
-	}
-	glVertex3f(radius, 0.0, height);
-	glEnd();
-
-	glBegin(GL_POLYGON);
-	angle = 0.0;
-	while (angle < 2 * pi) {
-		x = radius * cos(angle);
-		y = radius * sin(angle);
-		glVertex3f(x, y, 0);
-		angle = angle + angle_stepsize;
-	}
-	glVertex3f(radius, 0.0, height);
-	glEnd();
-	glPopMatrix();
-}
-
-void drawCrainArmSide(float crainWidth) {
-	//float length = 6;
-
-	glPushMatrix();
-	glColor3f(0.3, 0.3, 0.3);
-
-	glPushMatrix();
-	glLineWidth(5);
-	glBegin(GL_LINES);
-	glVertex3f(-0.3, 0.3, 0);
-	glVertex3f(-0.1, 0.1, crainWidth);
-
-	glVertex3f(0.3, 0.3, 0);
-	glVertex3f(0.1, 0.1, crainWidth);
-	glEnd();
-	glLineWidth(1);
-	glPopMatrix();
-
-	glPopMatrix();
-}
-
 void drawCircle(float radius) {
 	glPushMatrix();
-	glPushMatrix();
 	glBegin(GL_POLYGON);
-	for (float i = 0; i < 2 * pi; i += 0.01) {
-		float x = radius * cos(i);
-		float y = radius * sin(i);
-		glVertex3f(x, y, 0);
+	for (int i = 0; i < 32; i++) {
+		double angle = 2 * (PI / 32) * i;
+		glVertex2f(radius * cos(angle), radius * sin(angle));
 	}
 	glEnd();
 	glPopMatrix();
-	glPopMatrix();
 }
 
-void drawKappiArm() {
+void drawCylinder(float r, float h) {
 	glPushMatrix();
 
-	glPushMatrix();
-	glTranslatef(0.075, 0, 0.15);
-	glScalef(0.03, 0.03, 0.3);
-	glutSolidCube(1);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(-0.075, 0, 0.15);
-	glScalef(0.03, 0.03, 0.3);
-	glutSolidCube(1);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0, 0, 0.3);
-	glRotatef(90, 0, 1, 0);
-	glScalef(0.03, 0.03, 0.19);
-	glutSolidCube(1);
-	glPopMatrix();
-
-	glPopMatrix();
-}
-
-void drawKappiya(float radius) {
-	glColor3f(0.4, 0.4, 0.4);
-	glPushMatrix();
-
-	//drawKappiArm();
-
-	glPushMatrix();
-		glColor3f(0, 0, 0);
-
-		glPushMatrix();
-		glTranslatef(0.05, 0, 0.3);
-		glRotatef(90, 0, 1, 0);
-		drawCircle(radius);
-		glPopMatrix();
-
-		glPushMatrix();
-		glTranslatef(-0.05, 0, 0.3);
-		glRotatef(90, 0, 1, 0);
-		drawCircle(radius);
-		glPopMatrix();
-
-		glPushMatrix();
-		glTranslatef(0, 0, 0.3);
-		glRotatef(90, 0, 0, 1);
-		drawCylinder(radius / 2, 0.09);
-		glPopMatrix();
-	glPopMatrix();
-
-	glPopMatrix();
-}
-
-void drawCrainArm(float crainArm, float crainWidth) {
-	glPushMatrix();
-		glRotatef(-90, 0, 1, 0);
-		glPushMatrix();
-			glTranslatef(0, 3.5, 1.7);
-			glRotatef(crainArm - 40, 1, 0, 0);
-				glPushMatrix();
-					for (float i = 0; i <= 350; i += 90) {
-						glRotatef(i, 0, 0, 1);
-						drawCrainArmSide(crainWidth);
-					}
-					glPushMatrix();
-						glBegin(GL_POLYGON);
-						glVertex3f(-0.1, 0.1, crainWidth);
-						glVertex3f(0.1, 0.1, crainWidth);
-						glVertex3f(0.1, -0.1, crainWidth);
-						glVertex3f(-0.1, -0.1, crainWidth);
-						glEnd();
-					glPopMatrix();
-
-					// crain wheel
-					glPushMatrix();
-					glColor3f(0.3, 0.3, 0.3);					
-
-						glPushMatrix();
-						glColor3f(0, 0, 0);
-						glTranslatef(0, 0, crainWidth);
-
-						drawControlRoomUpKappiyaRopePart2(crainArm, crainWidth);
-						drawControlRoomUpKappiyaRopePart3(crainArm, crainWidth);
-
-						drawKappiArm();
-						drawKappiya(0.2);
-						glPopMatrix();
-
-					glPopMatrix();
-
-				glPopMatrix();
-		glPopMatrix();
-	glPopMatrix();
-}
-
-void drawControlRoomUpKappiyaSide(float height) {
-	float n = 0.1;
-	glPushMatrix();
-	
-	glPushMatrix();
-	glScalef(n, height, n);
-	glutSolidCube(1);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(0, -height / 2, -height / 4);
 	glRotatef(90, 1, 0, 0);
-	glScalef(n, height/2, n);
-	glutSolidCube(1);
-	glPopMatrix();
+	glTranslatef(0, 0, -h / 2);
+	glPushMatrix();
+	GLUquadricObj* quadratic;
+	quadratic = gluNewQuadric();
+	gluCylinder(quadratic, r, r, h, 100, 100);
+	drawCircle(r);
 
 	glPushMatrix();
-	glTranslatef(0, 0, -height / 4);
-	glRotatef(28, 1, 0, 0);
-	glScalef(n, ((height / 2) * pow(5, 0.5)), n);
-	glutSolidCube(1);
+	glTranslatef(0, 0, h);
+	drawCircle(r);
+	glPopMatrix();
+
 	glPopMatrix();
 
 	glPopMatrix();
 }
 
-void drawControlRoomUpKappiya(float height) {
-	float n = 0.1;
+void drawCylinderWithoutCircles(float r, float h) {
+	glPushMatrix();
 
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(0, 0, -h / 2);
 	glPushMatrix();
-	glColor3f(0.4, 0.4, 0.4);
-	glTranslatef(0, height / 2, 0);
-	glPushMatrix();
-	glPushMatrix();
-	glTranslatef(height / 4, 0, 0);
-	drawControlRoomUpKappiyaSide(height);
+	GLUquadricObj* quadratic;
+	quadratic = gluNewQuadric();
+	gluCylinder(quadratic, r, r, h, 100, 100);
+
 	glPopMatrix();
 
-	glPushMatrix();
-	glTranslatef(-height / 4, 0, 0);
-	drawControlRoomUpKappiyaSide(height);
-	glPopMatrix();
-
-	glPushMatrix();
-	float lineGap = 0.2;
-	int k = height / lineGap;
-	for (int i = 0; i <= k; i +=1) {
-		float l = (height / 2) - (i * lineGap);
-
-		glPushMatrix();
-		glLineWidth(5);
-		glBegin(GL_LINES);
-		if (i != 1) {
-			glVertex3f(-height / 4, l, 0);
-			glVertex3f(height / 4, l, 0);
-		}
-		
-		float z = ((l / 2) - (height / 4));
-		if (i >= 2) {			
-			glVertex3f(-height / 4, l, z);
-			glVertex3f(height / 4, l, z);
-		}
-
-		if (!(i == 0 || i == 1 || i == k)) {
-			glVertex3f(-height / 4, l, 0);
-			glVertex3f(-height / 4, l, z);
-
-			glVertex3f(height / 4, l, 0);
-			glVertex3f(height / 4, l, z);
-		}
-		glEnd();
-		glLineWidth(1);
-		glPopMatrix();
-	}
-
-	glPushMatrix();
-	//glTranslatef(height / 4, 0, 0);
-	glScalef(3, 1, 1);
-	glTranslatef(0, height / 2 + 0.1, -0.25);
-	//glScalef(0.5, 1, 1);
-	drawKappiya(height/4);
-	glPopMatrix();
-
-	glPopMatrix();
-	glPopMatrix();
 	glPopMatrix();
 }
+
 
 
 void drawControlRoomWindowsSide() {
@@ -341,20 +111,49 @@ void drawControlRoomWindowsSide() {
 	// window wall
 	glPushMatrix();
 	glColor3f(0.3, 0.3, 0.3);
+	// down
 	glBegin(GL_POLYGON);
 	glVertex3f(-1.5, -0.8, 1.5);
 	glVertex3f(1.5, -0.8, 1.5);
-	glVertex3f(1.5, 0.8, 1.5);
-	glVertex3f(-1.5, 0.8, 1.5);
+	glVertex3f(1.2, -0.6, 1.5);
+	glVertex3f(-1.2, -0.6, 1.5);
 	glEnd();
+
+	//up
+	glBegin(GL_POLYGON);
+	glVertex3f(-1.5, 0.8, 1.5);
+	glVertex3f(1.5, 0.8, 1.5);
+	glVertex3f(1.2, 0.6, 1.5);
+	glVertex3f(-1.2, 0.6, 1.5);
+	glEnd();
+
+	//right
+	glBegin(GL_POLYGON);
+	glVertex3f(1.5, 0.8, 1.5);
+	glVertex3f(1.5, -0.8, 1.5);
+	glVertex3f(1.2, -0.6, 1.5);
+	glVertex3f(1.2, 0.6, 1.5);
+	glEnd();
+
+	//left
+	glBegin(GL_POLYGON);
+	glVertex3f(-1.5, 0.8, 1.5);
+	glVertex3f(-1.5, -0.8, 1.5);
+	glVertex3f(-1.2, -0.6, 1.5);
+	glVertex3f(-1.2, 0.6, 1.5);
+	glEnd();
+
 	glPopMatrix();
 
-	glColor3f(0.1, 0.1, 0.1);
 	//left window
-	glPushMatrix();	
+	glPushMatrix();
+	//transparent
+	glColor4f(0, 0, 0, 0.5);
+
 	glTranslatef(0, 0, 1.5);
 	glScalef(2.4, 1.2, 0.1);
 	glutSolidCube(1);
+	//glDisable(GL_BLEND);
 	glPopMatrix();
 
 	// roof
@@ -377,88 +176,187 @@ void drawControlRoomWindows() {
 	glPopMatrix();
 }
 
-//Crain Rope
-void drawControlRoomUpKappiyaRopePart1() {
+void drawCrainArm(float crainArm, float crainWidth) {
+	float v = 0.4;
+	float angle = 60;
+	float midCylinderZpos = 1.5;
+
 	glPushMatrix();
-	glColor3f(1, 1, 0);
-
-
-	glLineWidth(3);
-	glBegin(GL_LINES);
-	glVertex3f(0, 6.2, 0);
-	glVertex3f(-1.5, 7.65, 0);
-	glEnd();
-	glPopMatrix();
-
-	glLineWidth(1);
-
-	glPopMatrix();
-}
-
-void drawControlRoomUpKappiyaRopePart2(float crainArm, float crainWidth) {
 	glPushMatrix();
-	glColor3f(1, 1, 0);
+	glRotatef(-crainArm, 1, 0, 0);
 	glLineWidth(3);
-	glBegin(GL_LINES);
-	glVertex3f(0, -0.2, 0.3);
-	glVertex3f(0, 0, -crainWidth + 3.3);
-	glEnd();
-	glLineWidth(1);
-	glPopMatrix();
-}
 
-void drawHook() {
-	float cubeSize = 1;
-	float n = 0.1 * cubeSize;
-
+	// crain
 	glPushMatrix();
 	glColor3f(0, 0, 0);
-	glTranslatef(0.1, 0, 0);
+	glBegin(GL_LINES);
 
-	glPushMatrix();
-	glTranslatef(0, n, 0);
-	glScalef(0.2, 0.01, 0.01);
-	glutSolidCube(cubeSize);
+	glVertex3f(-v, v, 0);
+	glVertex3f(-v / 4, v / 4, crainWidth);
+
+	glVertex3f(v, v, 0);
+	glVertex3f(v / 4, v / 4, crainWidth);
+
+	glVertex3f(v, -v, 0);
+	glVertex3f(v / 4, -v / 4, crainWidth);
+
+	glVertex3f(-v, -v, 0);
+	glVertex3f(-v / 4, -v / 4, crainWidth);
+
+	glEnd();
 	glPopMatrix();
 
+	// rope between cylinders
 	glPushMatrix();
-	glTranslatef(-n, 0, 0);
+	glColor3f(1, 0, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0, -0.19, midCylinderZpos - 0.1);
+	glVertex3f(0, 0.2, crainWidth + 0.4);
+	glEnd();
+	glPopMatrix();
+
+	// end rope
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0, 0.2, crainWidth + 0.5);
+	glVertex3f(0, -3, crainWidth + 0.5 - (crainArm / 15));
+	glEnd();
+	glPopMatrix();
+
+	// mid cylinder
+	glPushMatrix();
+	glColor3f(0, 0, 0);
+	glTranslatef(0, 0, midCylinderZpos);
 	glRotatef(90, 0, 0, 1);
-	glScalef(0.2, 0.01, 0.01);
-	glutSolidCube(cubeSize);
+	drawCylinder(0.2, 0.2);
 	glPopMatrix();
 
+	// end cylinder
 	glPushMatrix();
-	glTranslatef(0, -n, 0);
-	glScalef(0.2, 0.01, 0.01);
-	glutSolidCube(cubeSize);
+	glColor3f(0, 0, 0);
+	//glRotatef(-crainArm, 1, 0, 0);
+	glTranslatef(0, 0, crainWidth + 0.4);
+	glRotatef(90, 0, 0, 1);
+	drawCylinder(0.2, 0.2);
 	glPopMatrix();
+
+	// end cylinder base
+	glPushMatrix();
+	glColor3f(0, 0, 0);
+	//glRotatef(-crainArm, 1, 0, 0);
+	glTranslatef(0, 0, crainWidth);
+	glScalef(1, 1, 0.1);
+	glutSolidCube(0.4);
+	glPopMatrix();
+	
+	glPopMatrix();
+
+	// control room to mid cylinder rope
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glBegin(GL_LINES);
+	glVertex3f(0, 4.5, 0.5);
+	glVertex3f(0, (midCylinderZpos - 0.25) * sin(crainArm / angle), fabs((midCylinderZpos - 0.2) * cos(crainArm / angle)));
+	glEnd();
+	glPopMatrix();
+
+	glLineWidth(1);
 
 	glPopMatrix();
 }
 
-void drawControlRoomUpKappiyaRopePart3(float crainArm, float crainWidth) {
-	float x = crainArm/50;
-	float y = crainWidth;
-
-	if (0.5 < y - 8.5 + (4 * x)) {
-		x = 1;
-	}
+void drawTopCylinderSideArm() {
 	glPushMatrix();
+	glColor3f(0, 0, 0);
+	glLineWidth(2);
 
 	glPushMatrix();
-	glColor3f(1, 1, 0);
-	glLineWidth(3);
 	glBegin(GL_LINES);
-	glVertex3f(0, -0.05, 0.5);
-	glVertex3f(0, 9.5- y, y -8.5);
+	glVertex3f(0, 0, -1.3);
+	glVertex3f(0, 0, 0.4);
+
+	glVertex3f(0, 0, 0.4);
+	glVertex3f(0, 4, 0.4);
+
+	glVertex3f(0, 4, 0.4);
+	glVertex3f(0, 0, -1.3);
+	glEnd();
+	glPopMatrix();
+
+	glPushMatrix();
+	glBegin(GL_LINES);
+	for (float y = 1; y < 4; y++) {
+		float z = ((1.7 * y) / 4) - 1.3;
+
+		glVertex3f(0, y, 0.4);
+		glVertex3f(0, y, z);
+	}
+	glEnd();
+	glPopMatrix();
+
+	glLineWidth(1);
+	glPopMatrix();
+}
+
+void drawTopCylinder() {
+	glPushMatrix();
+
+	// side
+	glPushMatrix();
+	glTranslatef(-1, 0, 0);
+	drawTopCylinderSideArm();
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(1, 0, 0);
+	drawTopCylinderSideArm();
+	glPopMatrix();
+
+	// side bars
+	glPushMatrix();
+	glLineWidth(2);
+	glBegin(GL_LINES);
+	for (float y = 0; y <= 4; y++) {
+		if (y == 3) {
+			continue;
+		}
+		float z = ((1.7 * y) / 4) - 1.3;
+
+		glVertex3f(-1, y, 0.4);
+		glVertex3f(1, y, 0.4);
+
+		glVertex3f(-1, y, z);
+		glVertex3f(1, y, z);
+	}
 	glEnd();
 	glLineWidth(1);
+	glPopMatrix();
+
+	// top cylynder and cylinder rope
+	glPushMatrix();
+	glTranslatef(0, 4, 0.4);
+	glRotatef(90, 0, 0, 1);
+	drawCylinder(0.7, 1);
+	glColor3f(1, 0, 0);
+	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0, 9.5 - y, y - 8.5);
-	//glTranslatef(0, 5, 0);
-	drawHook();
+	glTranslatef(0, 4, 0.4);
+	glRotatef(90, 0, 0, 1);
+	drawCylinder(0.75, 0.15);
+	glPopMatrix();
+
+
+	// middle rope
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glLineWidth(2);
+	glBegin(GL_LINES);
+	glVertex3f(0, 0, -1.7);
+	glVertex3f(0, 4.1, -0.33);
+	glEnd();
+	glLineWidth(1);
 	glPopMatrix();
 
 	glPopMatrix();
@@ -469,53 +367,49 @@ void drawOperatingRoom(float crainArm, float crainWidth) {
 
 	glPushMatrix();
 	glColor3f(0.3, 0.3, 0.3);
-	glTranslatef(0, 2.7, 0);
-	drawCylinder(1.5, 0.6);
+	glTranslatef(0, -1, 0);
+	drawCylinder(1.5, 1);
 	glPopMatrix();
 
 	glPushMatrix();
 	glColor3f(0.6, 0.3, 0);
-	glTranslatef(0, 3.7, 0);
 	glScalef(2, 0.7, 2);
 	glutSolidCube(2);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(0, 5.2, 0);
+	glTranslatef(0, 1.5, 0);
 	drawControlRoomWindows();
 	glPopMatrix();
 
 	glPushMatrix();
+	glTranslatef(0, 0, 1.5);
 	drawCrainArm(crainArm, crainWidth);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-1.5, 6.2, 0);
-	glRotatef(-90, 0, 1, 0);
-	drawControlRoomUpKappiya(1.2);
+	glTranslatef(0, 2.5, 1.5);
+	glScalef(0.5, 0.5, 0.8);
+	glTranslatef(0, 0, -0.4);
+	drawTopCylinder();
 	glPopMatrix();
-
-	glPushMatrix();
-	drawControlRoomUpKappiyaRopePart1();
-	//drawControlRoomUpKappiyaRopePart2(crainArm, crainWidth);
-	glPopMatrix();
-
-
 
 	glPopMatrix();
 }
 
-
-
 void drawCrain(float crainY, float crainArm, float crainWidth) {
 	glPushMatrix();
-	glScalef(0.6, 0.6, 0.6);	
+	glScalef(0.6, 0.6, 0.6);
+	glPushMatrix();
+
 	glPushMatrix();
 	drawLatterPart();
 	topStage();
+	glPopMatrix();
 
 	glPushMatrix();
 	glRotatef(crainY, 0, 1, 0);
+	glTranslatef(0, 4, 0);
 	drawOperatingRoom(crainArm, crainWidth);
 	glPopMatrix();
 

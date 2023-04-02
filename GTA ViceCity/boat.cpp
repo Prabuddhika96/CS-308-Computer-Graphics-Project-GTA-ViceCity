@@ -308,6 +308,21 @@ void drawControlRoomTopBorders() {
     glVertex3f(1.8, 1, 0.1);
     glVertex3f(1.5, 1, -0.2);
     glEnd();
+
+    // front glass
+    glPushMatrix();
+    glColor4f(0, 0, 0, 0.7);
+
+    glBegin(GL_POLYGON);
+    glVertex3f(-1.4, 2, -0.25);
+    glVertex3f(-1.6, 1.5, -0.15);
+    glVertex3f(-1.8, 1, 0.1);
+    glVertex3f(1.8, 1, 0.1);
+    glVertex3f(1.6, 1.5, -0.15);
+    glVertex3f(1.4, 2, -0.25);
+    glEnd();
+    //glDisable(GL_BLEND);
+    glPopMatrix();
 }
 
 void drawControlRoomWalls(float depth) {    
