@@ -43,7 +43,8 @@ GLfloat rotBoxY = 0;
 
 
 void init() {
-    glClearColor(0.2f, 1.0f, 1.0f, 1.0f);
+    glClearColor(0.149, 0.588, 1, 0.5f);
+    //glClearColor(0.2f, 1.0f, 1.0f, 1.0f);
     //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glEnable(GL_DEPTH_TEST);
 
@@ -364,6 +365,21 @@ void boxes() {
     boxeCollection();
     glPopMatrix();
 
+    // boxes left to the boat house
+    glPushMatrix();
+    glTranslatef(-2, 8, -1);
+    glScalef(0.5, 0.5, 0.5);
+    glRotatef(90, 0, 1, 0);
+    boxeCollection();
+    glPopMatrix();
+
+    // boxes left front to the boat house
+    glPushMatrix();
+    glTranslatef(3.5, 8, 10);
+    glScalef(0.5, 0.5, 0.5);
+    boxeCollection();
+    glPopMatrix();
+
     //animated box
     glPushMatrix();
     glTranslatef(18.5, 2, 10);
@@ -542,12 +558,16 @@ void boats() {
 
 void vehicles() {
     glPushMatrix();
-    
-    glPushMatrix();
     glTranslatef(30, 6.5, -15);
     drawVehicle(1, 0, 0);
     glPopMatrix();
+}
 
+void bushes() {
+    glPushMatrix();
+    glTranslatef(-43, 7, 0);
+    glScalef(2, 1.5, 2);
+    drawBush(0.2, 4);
     glPopMatrix();
 }
 
@@ -621,6 +641,11 @@ void displayScene() {
     vehicles();
     glPopMatrix();
 
+    // Bush
+    glPushMatrix();
+    bushes();
+    glPopMatrix();
+
 
     glPopMatrix();
 }
@@ -632,7 +657,7 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(37 + camX, 20 + camY, 30 + camZ, 0, 0, 0, 0, 1, 0);
-    //gluLookAt(45 + camX, 3 + camY, 0 + camZ, 0, 0, 0, 0, 1, 0);
+    //gluLookAt(0 + camX, 3 + camY, 5 + camZ, 0, 0, 0, 0, 1, 0);
     //gluLookAt(15 + camX, 2 + camY, 0 + camZ, 0, 0, 0, 0, 1, 0);
 
     setLightning();
@@ -674,7 +699,8 @@ void display() {
     //drawFenceRow(6);
     //drawFloor(6, 5);
     //boxes();
-    //drawVehicle(1, 0, 0);
+    //drawVehicle(0, 0, 1);
+    //drawBush(0.2, 4.5);
 
     displayScene();
     

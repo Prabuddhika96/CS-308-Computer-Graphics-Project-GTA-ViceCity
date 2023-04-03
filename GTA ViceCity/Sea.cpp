@@ -21,7 +21,7 @@ int randomInt() {
 
 void colorPicker(int choice) {
 	if (choice == 1) {
-		glColor3f(0, 0.761, 0.788);
+		glColor3f(0, 0.514, 1);
 	}
 	else {
 		glColor3f(0.58, 0.91, 1);
