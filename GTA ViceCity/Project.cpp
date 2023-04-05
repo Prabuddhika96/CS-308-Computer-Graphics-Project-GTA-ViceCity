@@ -657,9 +657,6 @@ void display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(37 + camX, 20 + camY, 30 + camZ, 0, 0, 0, 0, 1, 0);
-    //gluLookAt(0 + camX, 3 + camY, 5 + camZ, 0, 0, 0, 0, 1, 0);
-    //gluLookAt(15 + camX, 2 + camY, 0 + camZ, 0, 0, 0, 0, 1, 0);
-
     setLightning();
 
     glTranslatef(sceX, sceY, sceZ);
@@ -672,12 +669,6 @@ void display() {
     //drawGrid();
     //drawSea();
     glPopMatrix();
-
-    ///*
-    // Boats
-    //glScalef(0.6, 0.6, 0.6);
-    //glPushMatrix();
-
 
 
     glPushMatrix();

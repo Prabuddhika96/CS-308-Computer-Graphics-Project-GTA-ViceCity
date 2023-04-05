@@ -5,7 +5,7 @@
 void drawNetHalf() {
 	glPushMatrix();
 	glColor3f(0, 0, 0);
-	//glLineWidth(1.5);
+	glLineWidth(1.5);
 	for (float i = -0.5; i <= 0.5; i += 0.25) {
 		glPushMatrix();
 		glBegin(GL_LINES);
@@ -35,7 +35,7 @@ void drawNet() {
 
 void drawLine_Y(float y1, float y2) {
 	glPushMatrix();
-	//glLineWidth(1.5);
+	glLineWidth(1.5);
 	glBegin(GL_LINES);
 	glVertex3f(0, y1, 0);
 	glVertex3f(0, y2, 0);
@@ -46,7 +46,7 @@ void drawLine_Y(float y1, float y2) {
 
 void drawLine_X(float x1, float x2) {
 	glPushMatrix();
-	//glLineWidth(1.5);
+	glLineWidth(1.5);
 	glBegin(GL_LINES);
 	glVertex3f(x1, 0, 0);
 	glVertex3f(x2, 0, 0);
