@@ -6,7 +6,6 @@ const double PI = 3.141592654;
 
 void drawStep() {
 	glPushMatrix();
-	//glScalef(1, 0.95, 1);
 	drawCemntRow(0.102, 0.059, 0, 0.541, 0.318, 0);
 	glPopMatrix();
 }
@@ -28,7 +27,6 @@ void drawStep_Z_line(int steps) {
 	glPushMatrix();
 
 	glPushMatrix();
-	//glTranslatef(0, -0.05, 0);
 	glPushMatrix();
 	for (float i = -1+0.05 ; i <= 1+0.05 ; i += 0.1) {
 		glPushMatrix();

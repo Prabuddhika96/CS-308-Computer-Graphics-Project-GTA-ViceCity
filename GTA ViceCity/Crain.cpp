@@ -153,7 +153,6 @@ void drawControlRoomWindowsSide() {
 	glTranslatef(0, 0, 1.5);
 	glScalef(2.4, 1.2, 0.1);
 	glutSolidCube(1);
-	//glDisable(GL_BLEND);
 	glPopMatrix();
 
 	// roof
@@ -235,7 +234,6 @@ void drawCrainArm(float crainArm, float crainWidth) {
 	// end cylinder
 	glPushMatrix();
 	glColor3f(0, 0, 0);
-	//glRotatef(-crainArm, 1, 0, 0);
 	glTranslatef(0, 0, crainWidth + 0.4);
 	glRotatef(90, 0, 0, 1);
 	drawCylinder(0.2, 0.2);
@@ -244,7 +242,6 @@ void drawCrainArm(float crainArm, float crainWidth) {
 	// end cylinder base
 	glPushMatrix();
 	glColor3f(0, 0, 0);
-	//glRotatef(-crainArm, 1, 0, 0);
 	glTranslatef(0, 0, crainWidth);
 	glScalef(1, 1, 0.1);
 	glutSolidCube(0.4);

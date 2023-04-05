@@ -172,9 +172,6 @@ void drawSea(int length) {
 			glPushMatrix();
 			glTranslatef(i, 0, j);
 
-			//int random = round(length / abs(i + j - 1));
-			 //int random = rand() % 10;
-			//int random = abs(i + j);
 			int random = randomInt();
 
 			texturePicker(random % 4);

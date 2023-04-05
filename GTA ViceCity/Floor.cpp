@@ -57,7 +57,6 @@ void drawFloorSide() {
 void drawFloorTop() {
 	glPushMatrix();
 	glBegin(GL_POLYGON);
-	//glColor3f(0.702, 0.435, 0.204);
 	glColor3f(0.427, 0.353, 0.286);
 	glVertex3f(-0.5, 0, -0.5);
 	glVertex3f(0.5, 0, -0.5);
@@ -124,14 +123,7 @@ void drawFloor(int length, int width) {
 		int k = (length) / 2;
 		int m = 1;
 		int l;
-		/*for (float i = -(k * 1); i < (k * 1); i += 1) {
-			glPushMatrix();
-			glTranslatef(i + (m * 0.5), 0, 0);
-			drawFloorCube();
-			glPopMatrix();
-
-		}*/
-
+		
 		if (width % 2 == 1) {
 			int l = (width - 1) / 2;
 			for (float i = -(k * 1); i <= (k * 1); i += 1) {

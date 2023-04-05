@@ -54,8 +54,6 @@ void init() {
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    //glOrtho(-40, 40, -40, 40, -40, 40);
 }
 
 void drawGrid() {
@@ -656,7 +654,7 @@ void display() {
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(37 + camX, 20 + camY, 30 + camZ, 0, 0, 0, 0, 1, 0);
+    gluLookAt(-37 + camX, 20 + camY, 30 + camZ, 0, 0, 0, 0, 1, 0);
     setLightning();
 
     glTranslatef(sceX, sceY, sceZ);
@@ -667,7 +665,6 @@ void display() {
     glPushMatrix();
     glColor3f(0.0, 0.2, 0.9);
     //drawGrid();
-    //drawSea();
     glPopMatrix();
 
 

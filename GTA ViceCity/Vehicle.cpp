@@ -155,12 +155,6 @@ void drawVehicleBox() {
 	glDisable(GL_CLIP_PLANE0);
 	glPopMatrix();
 
-	/*glPushMatrix();
-	glTranslatef(1.5, -0.75, 0);
-	glScalef(3, 1.5, 3.6);
-	glutSolidCube(1);
-	glPopMatrix();*/
-
 	glPopMatrix();
 }
 
@@ -246,7 +240,6 @@ void drawDoorWindow() {
 
 	glPushMatrix();
 	glColor4f(0, 0, 0, 0.7);
-	//glColor3f(0, 0, 0);
 	glScalef(3.6, 2.6, 3.7);
 	glutSolidCube(1);
 	glPopMatrix();
@@ -490,15 +483,9 @@ void drawVehicle(float r, float g, float b) {
 
 	glPushMatrix();
 	glTranslatef(6.5, -0.75, 0);
-	//glScalef(1, 1.2, 1);
 	drawVehicleFace(b, r, g);
 	glPopMatrix();
 
 	glPopMatrix();
-	//glColor3f(b, r, g);
-	
-	//drawVehicleFace(b, r, g);
-	//drawUnderWindowPart(b, r, g);
-	//drawWheel(b, r, g);
 	
 }

@@ -79,7 +79,6 @@ void drawCorridoLine() {
 
 
 void drawCorrido(int length) {
-	//drawCorridoLine();
 	glPushMatrix();
 
 	if (length % 2 == 1) {

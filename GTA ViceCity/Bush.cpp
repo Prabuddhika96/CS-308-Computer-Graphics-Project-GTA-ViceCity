@@ -39,7 +39,6 @@ void drawLeaves(float r, float h) {
 }
 
 void drawBush(float r, float h) {
-	//drawBranch(0.3, 5);
 	glPushMatrix();
 
 	glPushMatrix();

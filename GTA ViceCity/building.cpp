@@ -37,7 +37,6 @@ void drawFullBrick() {
 
 void drawHalfBric() {
 	glPushMatrix();
-	//glTranslatef(-0.25, 0, 0);
 	glPushMatrix();
 	//Enble clipping plan 0
 	glEnable(GL_CLIP_PLANE0);
@@ -136,7 +135,6 @@ void drawCementLine(float R, float G, float B, float R1, float G1, float B1, flo
 	for (float i = -width+0.05; i <= width-0.05; i += 0.1) {
 		glPushMatrix();
 		glTranslatef(i, 0, 0);
-		//drawCemntRow(0.2, 0.2, 0.2, 0.9, 0.9, 0.9);
 		drawCemntRow(R1, G1, B1, R, G, B);
 		glPopMatrix();
 	}
@@ -157,7 +155,6 @@ void drawFourWindow() {
 	glVertex3f(-2, -1, 0);
 	glEnd();
 
-	//glDisable(GL_BLEND);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -574,7 +571,6 @@ void drawWindowRaw(float R, float G, float B, float R1, float G1, float B1) {
 }
 
 void drawBuilding_1_Side_X(float R, float G, float B, float R1, float G1, float B1) {
-	//float width = ;
 	glPushMatrix();
 
 	// green wall
